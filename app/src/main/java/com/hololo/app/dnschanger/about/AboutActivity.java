@@ -3,14 +3,32 @@ package com.hololo.app.dnschanger.about;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar; // <-- این خط مهم اضافه شده است
 import com.hololo.app.dnschanger.R;
-import dagger.hilt.android.AndroidEntryPoint; // نقطه ویرگول به این خط اضافه شد
+import com.hololo.app.dnschanger.databinding.ActivityAboutBinding;
+import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class AboutActivity extends AppCompatActivity {
+
+    private ActivityAboutBinding binding;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about); // این یک layout فرضی است
+        binding = ActivityAboutBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        // تنظیم Toolbar
+        setSupportActionBar(binding.toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }
