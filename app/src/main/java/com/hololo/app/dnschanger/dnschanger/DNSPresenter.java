@@ -3,15 +3,11 @@ package com.hololo.app.dnschanger.dnschanger;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
-
 import com.google.gson.Gson;
 import com.hololo.app.dnschanger.R;
 import com.hololo.app.dnschanger.data.DNSSource;
 import com.hololo.app.dnschanger.settings.SettingsActivity;
-import com.hololo.app.dnschanger.utils.DNS;
-
 import java.util.List;
-
 import javax.inject.Inject;
 
 public class DNSPresenter implements IDNSPresenter {
