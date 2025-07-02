@@ -1,11 +1,8 @@
 package com.hololo.app.dnschanger.di.module;
 
 import android.content.Context;
-
 import com.google.gson.Gson;
-
 import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
@@ -13,7 +10,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext;
 import dagger.hilt.components.SingletonComponent;
 
 @Module
-@InstallIn(SingletonComponent.class) // نصب در کامپوننت سراسری Hilt
+@InstallIn(SingletonComponent.class)
 public class ApplicationModule {
 
     @Provides
