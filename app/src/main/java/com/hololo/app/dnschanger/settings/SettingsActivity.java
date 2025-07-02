@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.hololo.app.dnschanger.R;
-
+import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.hilt.android.AndroidEntryPoint
