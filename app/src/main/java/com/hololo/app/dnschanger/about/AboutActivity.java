@@ -3,7 +3,7 @@ package com.hololo.app.dnschanger.about;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar; // <-- این خط مهم برای رفع خطا اضافه شده است
+import androidx.appcompat.widget.Toolbar; // <-- This is the required import
 import com.hololo.app.dnschanger.databinding.ActivityAboutBinding;
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -18,7 +18,7 @@ public class AboutActivity extends AppCompatActivity {
         binding = ActivityAboutBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // تنظیم Toolbar
+        // Set up the Toolbar
         setSupportActionBar(binding.toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
