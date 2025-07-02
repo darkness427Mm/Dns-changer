@@ -6,13 +6,13 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.hololo.app.dnschanger.R;
 import com.hololo.app.dnschanger.databinding.ActivityMainBinding;
-import com.hololo.app.dnschanger.utils.DNS;
 
 import javax.inject.Inject;
 
@@ -103,7 +103,8 @@ public class MainActivity extends AppCompatActivity implements IDNSView, DialogI
 
     @Override
     public void showCustomDns(String dns1, String dns2) {
-        // Implementation for custom DNS dialog
+        // You can implement the logic for showing a custom DNS dialog here if needed.
+        // For example, creating a new AlertDialog with custom EditTexts.
     }
 
     @Override
