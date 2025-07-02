@@ -1,91 +1,71 @@
-apply plugin: 'com.android.application'
-apply plugin: 'android-apt'
-
+// استفاده از بلاک مدرن برای تعریف پلاگین‌ها
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt' // جایگزین 'android-apt'
+    id 'dagger.hilt.android.plugin'
+}
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    // اضافه کردن namespace و نسخه‌های SDK الزامی
+    namespace "com.msayan.stardnschanger"
+    compileSdk 34
+
     defaultConfig {
-        applicationId "com.hololo.app.dnschanger"
-        minSdkVersion 16
-        targetSdkVersion 25
+        applicationId "com.msayan.stardnschanger"
+        minSdk 21
+        targetSdk 34
         versionCode 1
-        versionName "1.0.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
-    signingConfigs {
-        release
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-}
 
-def Properties props = new Properties()
-def propFile = new File("${project.rootDir}/app/signing.properties")
-if (propFile.canRead()) {
-    props.load(new FileInputStream(propFile))
-
-    if (props != null
-            && props.containsKey("KEYSTORE_FILE")
-            && props.containsKey("KEYSTORE_PASSWORD")
-            && props.containsKey("KEY_ALIAS")
-            && props.containsKey("KEY_PASSWORD")) {
-
-        def keystoreFilePath = "${project.rootDir}" + props["KEYSTORE_FILE"]
-        def keystoreFile = new File(keystoreFilePath)
-        if (keystoreFile.canRead()) {
-            android.signingConfigs.release.storeFile = keystoreFile
-            android.signingConfigs.release.storePassword = props["KEYSTORE_PASSWORD"]
-            android.signingConfigs.release.keyAlias = props["KEY_ALIAS"]
-            android.signingConfigs.release.keyPassword = props["KEY_PASSWORD"]
-        } else {
-            println("keystore file not found: " + keystoreFilePath)
-            android.buildTypes.release.signingConfig = null
-        }
-    } else {
-        println("signing.properties found but some entries missing")
-        android.buildTypes.release.signingConfig = null
+    // تنظیم نسخه جاوا
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
-} else {
-    println("signing.properties not found")
-    android.buildTypes.release.signingConfig = null
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
+    // فعال‌سازی ViewBinding
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:25.1.0'
+    // تمام وابستگی‌ها با سینتکس مدرن
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.core:core-ktx:1.13.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.2'
 
+    // Hilt (Dagger)
+    implementation "com.google.dagger:hilt-android:2.48"
+    kapt "com.google.dagger:hilt-compiler:2.48" // استفاده از 'kapt' به جای 'apt'
 
-    //Rx
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'io.reactivex.rxjava2:rxjava:2.0.1'
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
-    //Dagger
-    compile 'com.google.dagger:dagger:2.9'
-    apt 'com.google.dagger:dagger-compiler:2.9'
-    provided 'javax.annotation:jsr250-api:1.0'
+    // Room
+    implementation "androidx.room:room-runtime:2.6.1"
+    kapt "androidx.room:room-compiler:2.6.1" // استفاده از 'kapt'
 
-    //gson
-    compile 'com.google.code.gson:gson:2.7'
-
-    //Log
-    compile 'com.jakewharton.timber:timber:4.5.1'
-
-
-    //Butterknife
-    compile 'com.jakewharton:butterknife:8.2.1'
-    apt 'com.jakewharton:butterknife-compiler:8.2.1'
-
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:design:25.1.1'
-    compile 'com.android.support:cardview-v7:25.1.1'
+    // وابستگی‌های تست
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
