@@ -11,8 +11,9 @@ import com.hololo.app.dnschanger.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-
+import dagger.hilt.android.AndroidEntryPoint
+    
+@AndroidEntryPoint
 public class SettingsActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar)
