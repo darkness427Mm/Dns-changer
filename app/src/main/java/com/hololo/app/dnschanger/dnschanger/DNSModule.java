@@ -1,23 +1,25 @@
 package com.hololo.app.dnschanger.dnschanger;
 
-import android.content.Context;
-import android.content.Intent;
-import com.google.gson.Gson;
-import com.hololo.app.dnschanger.data.DNSSource;
-import com.hololo.app.dnschanger.settings.SettingsActivity;
-import javax.inject.Inject;
+import android.app.Activity;
+import dagger.Module;
+import dagger.Provides;
+import dagger.hilt.InstallIn;
+import dagger.hilt.android.components.ActivityComponent;
+import dagger.hilt.android.scopes.ActivityScoped;
 
-public class DNSPresenter implements IDNSPresenter {
+@Module
+@InstallIn(ActivityComponent.class)
+public class DNSModule {
 
-    private final IDNSView view;
-    private final DNSSource dnsSource;
-
-    @Inject
-    public DNSPresenter(IDNSView view, Context context, Gson gson) {
-        this.view = view;
-        this.dnsSource = new DNSSource(context, gson);
+    @Provides
+    @ActivityScoped
+    public IDNSView provideView(Activity activity) {
+        return (IDNSView) activity;
     }
-    
-    // بقیه متدهای این کلاس بدون تغییر باقی می‌مانند
-    // ...
-}
+
+    @Provides
+    @ActivityScoped
+    public IDNSPresenter providePresenter(DNSPresenter presenter) {
+        return presenter;
+    }
+    }
