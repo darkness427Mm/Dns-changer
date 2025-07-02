@@ -1,38 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hololo.app.dnschanger">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <!--
+        این خط package="..." حذف شده است چون دیگر استفاده نمی‌شود.
+        نام پکیج حالا در فایل build.gradle تعریف می‌شود.
+    -->
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:name=".DNSChangerApp"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".dnschanger.MainActivity">
+        android:theme="@style/Theme.StarDNSChanger"
+        tools:ignore="GoogleAppIndexingWarning">
+
+        <activity
+            android:name=".dnschanger.MainActivity"
+            android:exported="true"> <!-- این خط برای سازگاری با اندروید ۱۲ اضافه شد -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <service
-            android:name=".dnschanger.DNSService"
-            android:permission="android.permission.BIND_VPN_SERVICE" />
+            android:name=".dnschanger.DNSVpnService"
+            android:permission="android.permission.BIND_VPN_SERVICE"
+            android:exported="false"> <!-- سرویس‌ها هم به این ویژگی نیاز دارند -->
+            <intent-filter>
+                <action android:name="android.net.VpnService" />
+            </intent-filter>
+        </service>
 
-        <activity android:name=".about.AboutActivity" />
-
-        <activity
-            android:name=".settings.SettingsActivity"
-            android:theme="@style/AppTheme.ActionBar" />
-
-        <receiver android:name=".dnschanger.BootReceiver">
+        <receiver
+            android:name=".dnschanger.BootReceiver"
+            android:enabled="true"
+            android:exported="true"> <!-- این خط برای سازگاری با اندروید ۱۲ اضافه شد -->
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
