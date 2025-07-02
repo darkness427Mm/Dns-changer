@@ -1,22 +1,22 @@
 buildscript {
-    ext.kotlin_version = '1.8.10' // به‌روزرسانی نسخه کاتلین
+    ext.kotlin_version = '1.9.22' // آپدیت به نسخه جدید کاتلین
     repositories {
         google()
-        mavenCentral() // جایگزین jcenter()
+        mavenCentral()
     }
     dependencies {
-        // به‌روزرسانی نسخه پلاگین اندروید
-        classpath 'com.android.tools.build:gradle:7.4.2'
+        // آپدیت به پلاگین اندروید نسخه ۸
+        classpath 'com.android.tools.build:gradle:8.2.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        // به‌روزرسانی پلاگین Hilt
-        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.44'
+        // آپدیت به آخرین نسخه پایدار Hilt
+        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.50'
     }
 }
 
 allprojects {
     repositories {
         google()
-        mavenCentral() // جایگزین jcenter()
+        mavenCentral()
         maven { url "https://jitpack.io" }
     }
 }
