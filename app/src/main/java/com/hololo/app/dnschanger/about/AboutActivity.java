@@ -1,5 +1,7 @@
 package com.hololo.app.dnschanger.about;
 
+import androidx.appcompat.app.AppCompatActivity;
+import dagger.hilt.android.AndroidEntryPoint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -16,6 +18,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+
+@AndroidEntryPoint // و این خط را
 public class AboutActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar)
