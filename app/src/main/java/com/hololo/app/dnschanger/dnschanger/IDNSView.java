@@ -1,9 +1,17 @@
 package com.hololo.app.dnschanger.dnschanger;
 
-import com.hololo.app.dnschanger.model.DNSModel;
-
 public interface IDNSView {
-    void changeStatus(int serviceStatus);
+    void setDns(String dns1, String dns2);
 
-    void setServiceInfo(DNSModel model);
+    void showDnsList(String[] list);
+
+    void hideDnsList();
+
+    void showCustomDns(String dns1, String dns2);
+
+    void hideCustomDns();
+
+    void setStatus(boolean isRunning);
+
+    void showMessage(String message);
 }
